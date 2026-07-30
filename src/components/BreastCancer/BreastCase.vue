@@ -43,54 +43,57 @@
 <script setup>
 import { ref } from "vue";
 import BreastCaseItem from "./BreastCaseItem.vue";
+import maskManImg from "../../assets/images/mask-man.png";
+import solidPlayImg from "../../assets/images/solid-play.png";
+import userImg from "../../assets/images/user.png";
+import bigMicrophoneImg from "../../assets/images/big-microphone.png";
+import womenMiniImg from "../../assets/images/women-mini.png";
+import pauseImg from "../../assets/images/pause.png";
+import bigFontSizeImg from "../../assets/images/big-font-size.png";
+import fontSize01Img from "../../assets/images/font-size-01.png";
+import helpImg from "../../assets/images/help.png";
 
 const breast = ref([
   {
     description:
       "Lorem Ipsum has been the industry's standard dummy text ever since.",
-    image: "../../../src/assets/images/mask-man.png",
+    image: maskManImg,
     nickName: "Aspen Ekstrom Bothman",
-    playImage: "../../../src/assets/images/solid-play.png",
+    playImage: solidPlayImg,
     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
-    userImage:'../../../src/assets/images/user.png'
-
+    userImage: userImg,
   },
   {
     description: "What did you try that didn’t help you better",
-    image: "../../../src/assets/images/big-microphone.png",
+    image: bigMicrophoneImg,
     nickName: "Aspen Ekstrom Bothman",
     playImage: "",
     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
-    womanImage: "../../../src/assets/images/women-mini.png",
-    userImage:'',
-    playImageRecorder: "../../../src/assets/images/solid-play.png",
-    recordingText:'Stop Recoding',
-    pause:'../../../src/assets/images/pause.png'
-
+    womanImage: womenMiniImg,
+    userImage: "",
+    playImageRecorder: solidPlayImg,
+    recordingText: "Stop Recoding",
+    pause: pauseImg,
   },
   {
     description:
       "What symptoms did you have? What was the western medical diagnosis and/or the eastern medicine diagnosis?",
-    image: "../../../src/assets/images/big-font-size.png",
+    image: bigFontSizeImg,
     playImage: "",
     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
     nickName: "",
-    userImage:'',
-    message:'Your Message',
-    messageImage:'../../../src/assets/images/font-size 01.png'
-
+    userImage: "",
+    message: "Your Message",
+    messageImage: fontSize01Img,
   },
   {
     description:
       "Lorem Ipsum has been the industry's standard dummy text ever since.",
     nickName: "Aspen Ekstrom Bothman",
-    image: "../../../src/assets/images/help.png",
-    playImage: "../../../src/assets/images/solid-play.png",
+    image: helpImg,
+    playImage: solidPlayImg,
     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
-    userImage:'../../../src/assets/images/user.png',
-   
-
-
+    userImage: userImg,
   },
 ]);
 </script>
