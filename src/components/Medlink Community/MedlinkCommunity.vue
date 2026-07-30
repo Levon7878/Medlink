@@ -28,7 +28,7 @@
             <img src="../../assets/images/clip-path-community.png" alt="">
         </div>
 
-        <div class="absolute flex flex-col gap-[160px] lg2:gap-[80px] lg:top-[55%] lg2:right-[10%] lg:!right-[25%] right-[133px] top-[125px]">
+        <div ref="statsRef" class="absolute flex flex-col gap-[160px] lg2:gap-[80px] lg:top-[55%] lg2:right-[10%] lg:!right-[25%] right-[133px] top-[125px]">
             <div class="flex items-center justify-end">
                 <div
                     class="w-[263px] h-[263px] rounded-[8px] bg-[#1F293314] backdrop-blur-[24px] p-[32px_24px_24px_24px] flex flex-col gap-[24px]">
@@ -37,7 +37,7 @@
                             Statistics</p>
                         <img src="../../assets/images/star-community.png" alt="">
                     </div>
-                    <div class="flex items-center justify-center h-screen">
+                    <div class="relative flex items-center justify-center h-[117px]">
                         <svg class="w-48 h-[117px]" viewBox="0 0 100 50">
                             <path d="M 5 45 A 45 45 0 0 1 95 45" fill="none" stroke="#f3f4f6" stroke-width="10" />
                             <path d="M 5 45 A 45 45 0 0 1 95 45" fill="none" stroke="#DAFF98" stroke-width="10"
@@ -57,13 +57,13 @@
             <div class="flex gap-[16px] lg2:flex-col">
                 <div
                     class="w-[263px] h-[120px] rounded-[8px] bg-[#1F293314] backdrop-blur-[24px] p-[16px] flex flex-col gap-[16px]">
-                    <p class="font-dm-sans text-[40px] font-medium leading-[40px] text-left text-[#FFFFFF]">80%</p>
+                    <p class="font-dm-sans text-[40px] font-medium leading-[40px] text-left text-[#FFFFFF]">{{ healthGoals }}%</p>
                     <p class="font-dm-sans text-[16px] font-medium leading-[16px] text-left text-[#FFFFFF]">achieve
                         their health goals with our help.</p>
                 </div>
                 <div
                     class="w-[263px] h-[120px] rounded-[8px] bg-[#1F293314] backdrop-blur-[24px] p-[16px] flex flex-col gap-[16px]">
-                    <p class="font-dm-sans text-[40px] font-medium leading-[40px] text-left text-[#FFFFFF]">10,000+</p>
+                    <p class="font-dm-sans text-[40px] font-medium leading-[40px] text-left text-[#FFFFFF]">{{ formattedTransformations }}</p>
                     <p class="font-dm-sans text-[16px] font-medium leading-[16px] text-left text-[#FFFFFF]">
                         transformations documented.</p>
                 </div>
@@ -72,14 +72,65 @@
     </div>
 </template>
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-const progress = ref(95);
+const progress = ref(0);
+const healthGoals = ref(0);
+const transformations = ref(0);
+const statsRef = ref(null);
+
+let observer = null;
+let hasAnimated = false;
 
 const progressStroke = computed(() => {
     const totalLength = 140;
     return `${(progress.value / 100) * totalLength} ${totalLength}`;
 });
+
+const formattedTransformations = computed(() =>
+    `${Math.round(transformations.value).toLocaleString('en-US')}+`
+);
+
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
+
+function animateValue(targetRef, target, duration = 1500) {
+    const start = performance.now();
+
+    function step(now) {
+        const t = Math.min((now - start) / duration, 1);
+        targetRef.value = Math.round(target * easeOutCubic(t));
+        if (t < 1) requestAnimationFrame(step);
+        else targetRef.value = target;
+    }
+
+    requestAnimationFrame(step);
+}
+
+function startAnimations() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    animateValue(progress, 95);
+    animateValue(healthGoals, 80);
+    animateValue(transformations, 10000, 2000);
+}
+
+onMounted(() => {
+    observer = new IntersectionObserver(
+        (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                startAnimations();
+                observer?.disconnect();
+            }
+        },
+        { threshold: 0.3 }
+    );
+
+    if (statsRef.value) observer.observe(statsRef.value);
+});
+
+onUnmounted(() => observer?.disconnect());
 </script>
 <style scoped>
 

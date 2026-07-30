@@ -17,37 +17,39 @@
           MedLink Community in action.
         </p>
       </div>
-      <div class="flex justify-center pl-[85px] xs:pl-0 ">
-        <div
-          class="max-w-[1128px] flex gap-[4px] bg-[#FFFFFF33] flex-shrink- overflow-hidden rounded-[110px] items-center mt-[40px]  p-[4px] relative overflow-y-x-visible">
-          <div class="pt-6 pr-8 pb-6 pl-8 bg-[#DAFF98] rounded-[40px] max-w-[83px] max-h-[70px]">
-            <p class="text-[#398B39]">All</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p>Cancer</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p class="w-[95px]">Chronic Pain</p>
-          </div>
-          <div class="w-[215px] pt-6 pr-8 pb-6 pl-8">
-            <p class="w-[151px]">High Blood Pressure</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p>Diabetes</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p class="w-[83px]">Skin issues</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p>Depression</p>
-          </div>
-          <div class="max-w-[190px] pt-6 pr-8 pb-6 pl-8">
-            <p class="w-[134px]">Suicidal Thoughts</p>
-          </div>
+      <div class="flex justify-center pl-[85px] xs:pl-0">
+        <div class="relative max-w-[1128px] w-full mt-[40px]">
           <div
-            class="w-[54px] h-[54px] bg-[#FFFFFF] rounded-[40px] absolute right-[0] bottom-[-20px] flex justify-center items-center z-[10000]">
-            <img src="../../assets/images/rigth-icon.png" alt="" />
+            ref="filterScroll"
+            class="flex gap-[4px] bg-[#FFFFFF33] rounded-[110px] items-center p-[4px] pl-[58px] pr-[58px] overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div class="flex-shrink-0 py-6 px-8 bg-[#DAFF98] rounded-[40px]">
+              <p class="text-[#398B39] font-medium whitespace-nowrap">All</p>
+            </div>
+            <div
+              v-for="category in categories"
+              :key="category"
+              class="flex-shrink-0 py-6 px-8"
+            >
+              <p class="whitespace-nowrap">{{ category }}</p>
+            </div>
           </div>
+          <button
+            type="button"
+            class="absolute left-[4px] top-1/2 -translate-y-1/2 z-10 w-[54px] h-[54px] bg-[#FFFFFF] rounded-full flex justify-center items-center shrink-0"
+            aria-label="Scroll categories left"
+            @click="scrollFiltersLeft"
+          >
+            <img :src="leftIcon" alt="" class="w-[20px] h-[20px] brightness-0" />
+          </button>
+          <button
+            type="button"
+            class="absolute right-[4px] top-1/2 -translate-y-1/2 z-10 w-[54px] h-[54px] bg-[#FFFFFF] rounded-full flex justify-center items-center shrink-0"
+            aria-label="Scroll categories right"
+            @click="scrollFiltersRight"
+          >
+            <img :src="rightIcon" alt="" class="w-[20px] h-[20px] brightness-0" />
+          </button>
         </div>
       </div>
       <div class="mt-[40px] flex justify-center">
@@ -149,6 +151,31 @@
     </section>
   </div>
 </template>
-<script>
+<script setup>
+import { ref } from "vue";
+import rightIcon from "../../assets/images/rigth-icon.png";
+import leftIcon from "../../assets/images/left-icon.png";
+
+const categories = [
+  "Cancer",
+  "Chronic Pain",
+  "High Blood Pressure",
+  "Diabetes",
+  "Skin issues",
+  "Depression",
+  "Suicidal Thoughts",
+];
+
+const filterScroll = ref(null);
+
+const scrollStep = 240;
+
+const scrollFiltersRight = () => {
+  filterScroll.value?.scrollBy({ left: scrollStep, behavior: "smooth" });
+};
+
+const scrollFiltersLeft = () => {
+  filterScroll.value?.scrollBy({ left: -scrollStep, behavior: "smooth" });
+};
 </script>
 <style scoped></style>

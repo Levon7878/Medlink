@@ -22,10 +22,16 @@
       </div>
     </div>
     <div class="flex items-center justify-center">
-      <div class="max-w-[1300px] overflow-hidden" @wheel.prevent="handleScroll">
+      <div
+        class="max-w-[1300px] overflow-hidden cursor-grab select-none active:cursor-grabbing"
+        @wheel.prevent="handleScroll"
+        @mousedown="onDragStart"
+        @touchstart.passive="onDragStart"
+      >
         <div
-          class="flex transition-transform duration-300 gap-[40px] mt-[60px]"
-          :style="{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }"
+          class="flex gap-[40px] mt-[60px] transition-transform duration-300"
+          :class="{ '!transition-none': isDragging }"
+          :style="trackStyle"
         >
           <div
             v-for="(slide, index) in slides"
@@ -46,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onUnmounted } from "vue";
 import SliderItem01 from "./SliderItem01.vue";
 
 const props = defineProps({
@@ -57,6 +63,19 @@ const props = defineProps({
 });
 
 const currentIndex = ref(0);
+const isDragging = ref(false);
+const dragOffset = ref(0);
+const dragStartX = ref(0);
+
+const trackStyle = computed(() => ({
+  transform: `translateX(calc(-${currentIndex.value * (100 / 3)}% + ${dragOffset.value}px))`,
+}));
+
+const getClientX = (event) => {
+  if (event.touches?.length) return event.touches[0].clientX;
+  if (event.changedTouches?.length) return event.changedTouches[0].clientX;
+  return event.clientX;
+};
 
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % props.slides.length;
@@ -74,6 +93,56 @@ const handleScroll = (event) => {
     prevSlide();
   }
 };
+
+const onDragMove = (event) => {
+  if (!isDragging.value) return;
+
+  if (event.type === "touchmove") {
+    event.preventDefault();
+  }
+
+  dragOffset.value = getClientX(event) - dragStartX.value;
+};
+
+const onDragEnd = () => {
+  if (!isDragging.value) return;
+
+  const threshold = 50;
+
+  if (dragOffset.value < -threshold) {
+    nextSlide();
+  } else if (dragOffset.value > threshold) {
+    prevSlide();
+  }
+
+  isDragging.value = false;
+  dragOffset.value = 0;
+
+  document.removeEventListener("mousemove", onDragMove);
+  document.removeEventListener("mouseup", onDragEnd);
+  document.removeEventListener("touchmove", onDragMove);
+  document.removeEventListener("touchend", onDragEnd);
+};
+
+const onDragStart = (event) => {
+  if (event.type === "mousedown" && event.button !== 0) return;
+
+  isDragging.value = true;
+  dragStartX.value = getClientX(event);
+  dragOffset.value = 0;
+
+  document.addEventListener("mousemove", onDragMove);
+  document.addEventListener("mouseup", onDragEnd);
+  document.addEventListener("touchmove", onDragMove, { passive: false });
+  document.addEventListener("touchend", onDragEnd);
+};
+
+onUnmounted(() => {
+  document.removeEventListener("mousemove", onDragMove);
+  document.removeEventListener("mouseup", onDragEnd);
+  document.removeEventListener("touchmove", onDragMove);
+  document.removeEventListener("touchend", onDragEnd);
+});
 </script>
 
 <style scoped>

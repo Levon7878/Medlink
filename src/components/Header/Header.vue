@@ -16,15 +16,32 @@
               <img src="../../assets/images/search.png" alt="Search Icon" class="w-6 h-6" />
             </div>
             <div v-if="isSearchOpen"
-              class="flex items-center max-w-full w-[476px] h-[56px] border border-gray-300 rounded-full input-background pr-[8px]">
-              <div @click="toggleSearch" class="cursor-pointer p-2 pl-2 rounded-full">
-                <img src="../../assets/images/search.png" alt="Search Icon" class="w-6 h-6" />
-              </div>
-              <input v-model="searchQuery" type="text" placeholder="Search"
-                class="w-full p-[8px_8px_8px_0px] focus:outline-none" @click="openSearchPanel" />
-              <div class="right-[16px] cursor-pointer" @click="toggleSearch">
-                <img src="../../assets/images/close.png" alt="Close Icon" />
-              </div>
+              class="flex items-center gap-3 max-w-full w-[476px] h-[56px] border border-gray-300 rounded-full input-background bg-white px-4">
+              <button
+                type="button"
+                class="shrink-0 flex items-center justify-center"
+                aria-label="Close search"
+                @click="toggleSearch"
+              >
+                <img src="../../assets/images/search.png" alt="" class="w-6 h-6" />
+              </button>
+              <input
+                ref="searchInput"
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search"
+                class="flex-1 min-w-0 h-full bg-transparent rounded-full border-0 py-2 px-2 text-[16px] text-[#1F2933] placeholder:text-[#1F2933A3] focus:outline-none focus:ring-0"
+                @click="openSearchPanel"
+                @focus="openSearchPanel"
+              />
+              <button
+                type="button"
+                class="shrink-0 flex items-center justify-center p-1 ml-1"
+                aria-label="Clear search"
+                @click="toggleSearch"
+              >
+                <img src="../../assets/images/close.png" alt="" class="w-4 h-4" />
+              </button>
             </div>
             <div v-if="isSearchPanel"
               class="absolute bg-white border border-gray-300 rounded-lg w-full max-h-60 overflow-y-auto z-10">
@@ -72,13 +89,14 @@
 <script setup>
 import LoginForm from "../LoginForm/LoginForm.vue";
 import BurgerMenu from "../BurgerMenu/BurgerMenu.vue";
-import { ref } from "vue";
+import { ref, watch, nextTick } from "vue";
 import PatientsMenu from "../PatientsMenu/PatientsMenu.vue";
 const isOpen = ref(false);
 const isSearchOpen = ref(false);
 const isPopupVisible = ref(false);
 const isSearchPanel = ref(false);
 const searchQuery = ref("");
+const searchInput = ref(null);
 const items = ref([
   "Abdominal Pain",
   "Antibiotics",
@@ -90,8 +108,16 @@ const toggleSearch = () => {
   isSearchOpen.value = !isSearchOpen.value;
   if (!isSearchOpen.value) {
     isSearchPanel.value = false;
+    searchQuery.value = "";
   }
 };
+
+watch(isSearchOpen, async (open) => {
+  if (open) {
+    await nextTick();
+    searchInput.value?.focus();
+  }
+});
 
 const openSearchPanel = () => {
   isSearchPanel.value = true;
