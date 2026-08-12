@@ -1,5 +1,8 @@
 <template>
-    <div class="relative bg-[#B4C0D0] bg-[url('../../../src/assets/images/BreastCancer.png')] bg-cover bg-no-repeat bg-right w-full h-[881px] rounded-[0px_24px_24px_24px]">
+    <div
+        class="relative bg-[#B4C0D0] bg-cover bg-no-repeat bg-right w-full h-[881px] rounded-[0px_24px_24px_24px]"
+        :style="{ backgroundImage: `url(${breastCancerImg})` }"
+    >
         <div class="flex pl-[136px] lg3:pl-[0px] lg3:justify-center pt-[210px] bg-gradient-to-l from-transparent to-[#B4C0D0]  h-[100%] rounded-[0px_0px_0px_24px]">
             <div class="flex flex-col gap-[48px]">
                 <p class="max-w-[430px] lg3:max-w-[600px] font-dm-sans text-[96px] font-normal leading-[96px] tracking-[-0.06em] text-left text-[#1F2933]">Breast Cancer</p>
@@ -12,7 +15,9 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+import breastCancerImg from "../../assets/images/BreastCancer.png";
+</script>
 
 <style scoped>
-</style> 
+</style>

@@ -1,5 +1,8 @@
 <template>
-    <div class="relative bg-[#B4C0D0] bg-[url('../../../src/assets/images/participant.png')] bg-cover bg-no-repeat bg-right w-full h-[881px] rounded-[0px_24px_24px_24px]">
+    <div
+        class="relative bg-[#B4C0D0] bg-cover bg-no-repeat bg-right w-full h-[881px] rounded-[0px_24px_24px_24px]"
+        :style="{ backgroundImage: `url(${participantImg})` }"
+    >
         <div class="flex pl-[136px] pt-[210px] xs:p-[0px] background: linear-gradient(270deg, rgba(180, 192, 208, 0) 0%, #B4C0D0 58.87%) h-[100%] rounded-[0px_0px_0px_24px] max-w-[1130px] bg-gradient-to-l from-transparent to-[#B4C0D0]" style="background: linear-gradient(270deg, rgba(180, 192, 208, 0) 0%, #B4C0D0 58.87%);">
                 <div class=" flex flex-col gap-[48px]">
                     <p class=" font-dm-sans text-[96px] font-normal leading-[96px] tracking-[-0.06em] text-left text-[#1F2933]">Breast Cancer Healing Journeys Participant Summary  </p>
@@ -14,7 +17,9 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+import participantImg from "../../assets/images/participant.png";
+</script>
 
 <style scoped>
 </style>

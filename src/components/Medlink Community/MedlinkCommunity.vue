@@ -22,7 +22,10 @@
                     Us</button>
             </div>
         </div>
-        <div class="max-w-[780px] w-full bg-center bg-no-repeat h-[780px] bg-[url(src/assets/images/community-img.png)]">
+        <div
+            class="max-w-[780px] w-full bg-center bg-no-repeat h-[780px]"
+            :style="{ backgroundImage: `url(${communityImg})` }"
+        >
         </div>
         <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2">
             <img src="../../assets/images/clip-path-community.png" alt="">
@@ -73,6 +76,7 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import communityImg from '../../assets/images/community-img.png';
 
 const progress = ref(0);
 const healthGoals = ref(0);

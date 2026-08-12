@@ -122,7 +122,7 @@
             </div>
             <div class="max-w-[554px] xs:max-w-[329px] flex flex-col gap-[16px] border border-[#1F293314] rounded-[40px] p-[24px]">
               <div class="flex items-start gap-[16px]">
-                <img src="../../assets/images/font-size 01.png" alt="" />
+                <img src="../../assets/images/font-size-01.png" alt="" />
                 <h3 class="w-[448px]">
                   What symptoms did you have? What was the western medical
                   diagnosis and/or the eastern medicine diagnosis?

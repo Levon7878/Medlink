@@ -110,7 +110,8 @@
             </div>
             <div class="flex items-center flex-col gap-[24px]">
                 <div
-                    class="bg-[url('../../../src/assets/images/videiRecordReview.png')] rounded-[40px] w-[464px] h-[642px] small:w-[350px] small:bg-center">
+                    class="rounded-[40px] w-[464px] h-[642px] small:w-[350px] small:bg-center bg-cover bg-no-repeat"
+                    :style="{ backgroundImage: `url(${videoRecordReviewImg})` }">
                     <div class="flex flex-col h-[100%] justify-between">
                         <div class="flex items-center justify-end pr-[24px] pt-[24px]">
                             <div @click="openSettingsPopup"
@@ -326,6 +327,7 @@
 
 <script setup>
 import { ref, onUnmounted, computed } from 'vue';
+import videoRecordReviewImg from '../../assets/images/videiRecordReview.png';
 
 const isRecording = ref(false);
 const isStopped = ref(false);

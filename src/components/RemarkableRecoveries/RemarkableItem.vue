@@ -3,7 +3,7 @@
     <div class="relative h-[583.61px] w-[756px] lg4:w-[600px] xl:!w-full ">
       <img :src="image" class="rounded-[15px] w-full h-full" alt="Remarkable Item" />
       <div class=" absolute bottom-0 right-[10%] max-w-[600px] xl:max-w-[736px] xl:left-[17%] xl:right-[21%]">
-        <img src="../../../src/assets/images/rectangle-end.png" class="filter-black-filter" alt="Decoration" />
+        <img src="../../assets/images/rectangle-end.png" class="filter-black-filter" alt="Decoration" />
       </div>
     </div>
     <div>

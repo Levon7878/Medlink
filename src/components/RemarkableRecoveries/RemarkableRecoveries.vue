@@ -42,30 +42,32 @@
 <script setup>
 import RemarkableItem from "./RemarkableItem.vue";
 import { ref, computed, onMounted } from "vue";
+import doctorsImg from "../../assets/images/doctors.jpeg";
+import doctorImg from "../../assets/images/doctor.jpeg";
 
 const latestObj = ref([
   {
-    image: "../../../src/assets/images/doctors.jpeg",
+    image: doctorsImg,
     text: "Summary:",
     description: "Those who have successfully navigated their healing journey often advise others to seek multiple opinions, stay proactive in managing their health, and explore integrative therapies that align with their values and lifestyle. Building a supportive community and prioritizing self-care are also frequently emphasized as key components of recovery.",
   },
   {
-    image: "../../../src/assets/images/doctor.jpeg",
+    image: doctorImg,
     text: "Summary:",
     description: "Those who have successfully navigated their healing journey often advise others to seek multiple opinions, stay proactive in managing their health, and explore integrative therapies that align with their values and lifestyle. Building a supportive community and prioritizing self-care are also frequently emphasized as key components of recovery.",
   },
   {
-    image: "../../../src/assets/images/doctors.jpeg",
+    image: doctorsImg,
     text: "Summary:",
     description: "Those who have successfully navigated their healing journey often advise others to seek multiple opinions, stay proactive in managing their health, and explore integrative therapies that align with their values and lifestyle. Building a supportive community and prioritizing self-care are also frequently emphasized as key components of recovery.",
   },
   {
-    image: "../../../src/assets/images/doctor.jpeg",
+    image: doctorImg,
     text: "Summary:",
     description: "Those who have successfully navigated their healing journey often advise others to seek multiple opinions, stay proactive in managing their health, and explore integrative therapies that align with their values and lifestyle. Building a supportive community and prioritizing self-care are also frequently emphasized as key components of recovery.",
   },
   {
-    image: "../../../src/assets/images/doctors.jpeg",
+    image: doctorsImg,
     text: "Summary:",
     description: "Those who have successfully navigated their healing journey often advise others to seek multiple opinions, stay proactive in managing their health, and explore integrative therapies that align with their values and lifestyle. Building a supportive community and prioritizing self-care are also frequently emphasized as key components of recovery.",
   },
