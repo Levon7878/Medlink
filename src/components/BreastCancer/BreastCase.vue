@@ -34,8 +34,18 @@
       </div>
     </div>
     <div class="flex justify-center py-[60px] gap-[8px] lg3:flex-col">
-      <button  class="bg-customGray rounded-[40px] text-[white] p-[32px_48px] font-dm-sans text-[16px] font-semibold leading-[16px]">Subscribe to Beast Cancer videos</button>
-      <button class="bg-[#DAFF98] rounded-[40px] text-[#398B39] p-[32px_48px] font-dm-sans text-[16px] font-semibold leading-[16px]">Read about Breast Cancer</button>
+      <router-link
+        to="/video-interview"
+        class="bg-customGray rounded-[40px] text-[white] p-[32px_48px] font-dm-sans text-[16px] font-semibold leading-[16px] text-center"
+      >
+        Subscribe to Breast Cancer videos
+      </router-link>
+      <router-link
+        to="/breast-cancer"
+        class="bg-[#DAFF98] rounded-[40px] text-[#398B39] p-[32px_48px] font-dm-sans text-[16px] font-semibold leading-[16px] text-center"
+      >
+        Read about Breast Cancer
+      </router-link>
     </div>
   </div>
 </template>

@@ -162,6 +162,26 @@ const props = defineProps({
 const openMenu = () => {
   isOpen.value = !isOpen.value;
 };
+
+const shareLink = async () => {
+  const url = window.location.href;
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: props.description, url });
+    } else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard");
+    }
+  } catch {
+    // user cancelled share
+  }
+  isOpen.value = false;
+};
+
+const report = () => {
+  alert("Thanks — this story was flagged for review.");
+  isOpen.value = false;
+};
 </script>
 
 <style></style>

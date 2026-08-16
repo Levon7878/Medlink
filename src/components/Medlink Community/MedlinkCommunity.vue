@@ -15,11 +15,19 @@
             </div>
             <div class="max-w-[435px] h-[80px] flex gap-[8px] rounded-[80px] mt-[50px]">
                 <button
-                    class="max-w-[243px] h-[80px] p-[32px_64px] gap-[16px] rounded-[40px] bg-[#1F2933] text-[#FFFFFF] font-dm-sans text-[16px] font-semibold leading-[16px] text-left">Learn
-                    about us</button>
+                    type="button"
+                    class="max-w-[243px] h-[80px] p-[32px_64px] gap-[16px] rounded-[40px] bg-[#1F2933] text-[#FFFFFF] font-dm-sans text-[16px] font-semibold leading-[16px] text-left cursor-pointer"
+                    @click="goLearnAboutUs"
+                >
+                    Learn about us
+                </button>
                 <button
-                    class="max-w-[184px] h-[80px] p-[32px_64px] gap-[10px] rounded-[40px] font-dm-sans text-[16px] font-semibold leading-[16px] text-left bg-[#DAFF98] text-[#398B39]">Join
-                    Us</button>
+                    type="button"
+                    class="max-w-[184px] h-[80px] p-[32px_64px] gap-[10px] rounded-[40px] font-dm-sans text-[16px] font-semibold leading-[16px] text-left bg-[#DAFF98] text-[#398B39] cursor-pointer"
+                    @click="openJoinUs"
+                >
+                    Join Us
+                </button>
             </div>
         </div>
         <div
@@ -73,10 +81,21 @@
             </div>
         </div>
     </div>
+
+    <LoginForm
+        :isVisible="isJoinVisible"
+        :startAsRegister="true"
+        @close="isJoinVisible = false"
+    />
 </template>
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
 import communityImg from '../../assets/images/community-img.png';
+import LoginForm from '../LoginForm/LoginForm.vue';
+
+const router = useRouter();
+const isJoinVisible = ref(false);
 
 const progress = ref(0);
 const healthGoals = ref(0);
@@ -135,6 +154,14 @@ onMounted(() => {
 });
 
 onUnmounted(() => observer?.disconnect());
+
+const goLearnAboutUs = () => {
+    router.push('/about');
+};
+
+const openJoinUs = () => {
+    isJoinVisible.value = true;
+};
 </script>
 <style scoped>
 

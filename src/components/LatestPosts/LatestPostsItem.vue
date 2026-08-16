@@ -45,7 +45,9 @@
           >
             {{ item.description }}
           </p>
-          <a class="text-[#FFFFFF]">{{ item.watch }}</a>
+          <router-link to="/video-interview" class="text-[#FFFFFF] hover:opacity-80">
+            {{ item.watch }}
+          </router-link>
         </div>
       </div>
     </div>

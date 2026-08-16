@@ -38,91 +38,15 @@
                   For Patients
                   <div class="pt-[24px]" :class="{ 'hidden': !isVisible, 'block': isVisible }">
                     <ul class="flex flex-col gap-[20px] h-[285px] overflow-auto">
-                      <li class="font-dm-sans text-[16px] leading-[24px] text-left font-[800] text-[#003b80]">
-                        <router-link to="/breast-cancer" @click.self="toggleMenu">
-                          Breast Cancer
+                      <li
+                        v-for="item in patientLinks"
+                        :key="item.to"
+                        class="font-dm-sans text-[16px] leading-[24px] text-left text-[#1F2933]"
+                        :class="{ 'font-[800] text-[#003b80]': item.featured }"
+                      >
+                        <router-link :to="item.to" @click="toggleMenu">
+                          {{ item.label }}
                         </router-link>
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        IBD
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Migraine
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Multiple Sclerosis (MS)
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Rheumatoid Arthritis
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Type 2 Diabetes
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Sponsored Topics
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Acid Reflux
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        ADHD
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Allergies
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Alzheimer’s & Dementia
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Bipolar Disorder
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Cancer
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Crohn’s Disease
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Chronic Pain
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Cold & Flu
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        COPD
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Depression
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Fibromyalgia
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Heart Disease
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        High Cholesterol
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        HIV
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Hypertension
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        IPF
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Osteoarthritis
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Psoriasis
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        Skin Disorders Care
-                      </li>
-                      <li class="font-dm-sans text-[16px] font-normal leading-[24px] text-left text-[#1F2933]">
-                        STDs
                       </li>
                     </ul>
                   </div>
@@ -135,7 +59,7 @@
                 </li>
                 <li
                   class="font-dm-sans text-[24px] font-medium leading-[28.8px] tracking[-0.02em] text-left text-[#1F2933] pb-[24px] pt-[24px] border-b border-[#1F293314]">
-                  <router-link to="/case-studies" @click="toggleOverflow">
+                  <router-link to="/about" @click="toggleOverflow">
                     About Us
                   </router-link>
                 </li>
@@ -152,17 +76,49 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, defineProps } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { conditionPath } from "../../data/conditions";
 
 const isOpen = ref(false);
 const isVisible = ref(false);
 
-const props = defineProps({
+defineProps({
   openPopup: {
     type: Function,
     required: true,
   },
 });
+
+const patientLinks = [
+  { label: "Breast Cancer", to: "/breast-cancer", featured: true },
+  { label: "IBD", to: conditionPath("ibd") },
+  { label: "Migraine", to: conditionPath("migraine") },
+  { label: "Multiple Sclerosis (MS)", to: conditionPath("multiple-sclerosis") },
+  { label: "Rheumatoid Arthritis", to: conditionPath("rheumatoid-arthritis") },
+  { label: "Type 2 Diabetes", to: conditionPath("type-2-diabetes") },
+  { label: "Sponsored Topics", to: "/case-studies" },
+  { label: "Acid Reflux", to: conditionPath("acid-reflux") },
+  { label: "ADHD", to: conditionPath("adhd") },
+  { label: "Allergies", to: conditionPath("allergies") },
+  { label: "Alzheimer’s & Dementia", to: conditionPath("alzheimers-dementia") },
+  { label: "Bipolar Disorder", to: conditionPath("bipolar-disorder") },
+  { label: "Cancer", to: conditionPath("cancer") },
+  { label: "Crohn’s Disease", to: conditionPath("crohns-disease") },
+  { label: "Chronic Pain", to: conditionPath("chronic-pain") },
+  { label: "Cold & Flu", to: conditionPath("cold-flu") },
+  { label: "COPD", to: conditionPath("copd") },
+  { label: "Depression", to: conditionPath("depression") },
+  { label: "Fibromyalgia", to: conditionPath("fibromyalgia") },
+  { label: "Heart Disease", to: conditionPath("heart-disease") },
+  { label: "High Cholesterol", to: conditionPath("high-cholesterol") },
+  { label: "HIV", to: conditionPath("hiv") },
+  { label: "Hypertension", to: conditionPath("hypertension") },
+  { label: "IPF", to: conditionPath("ipf") },
+  { label: "Osteoarthritis", to: conditionPath("osteoarthritis") },
+  { label: "Psoriasis", to: conditionPath("psoriasis") },
+  { label: "Skin Disorders Care", to: conditionPath("skin-disorders-care") },
+  { label: "STDs", to: conditionPath("stds") },
+];
 
 function toggleMenu() {
   isOpen.value = !isOpen.value;
@@ -177,8 +133,8 @@ onMounted(() => {
 });
 
 const toggleOverflow = () => {
-  isOpen.value = false
-}
+  isOpen.value = false;
+};
 
 watch(isOpen, (newValue) => {
   document.body.style.overflow = newValue ? "hidden" : "auto";

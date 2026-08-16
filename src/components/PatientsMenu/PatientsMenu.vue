@@ -1,6 +1,5 @@
 <template>
   <div class="absolute z-10 right-[160px] top-[80px]" :class="{ hidden: !isOpen }">
-
     <div class="max-w-[1140px] p-[40px] rounded-[24px] bg-[#FFFFFF]">
       <div>
         <h3 class="font-medium text-[24px] leading-[32px] text-customGray">
@@ -10,117 +9,114 @@
       </div>
       <div class="flex gap-[118.33px] mt-[20px]">
         <div class="max-w-[176px] flex flex-col gap-[20px]">
-          <router-link to="/breast-cancer">
-            <p class="font-[800] leading-[24px] text-[#003b80] text-[16px]">
-              Breast Cancer
-            </p>
+          <router-link
+            v-for="item in columns[0]"
+            :key="item.to"
+            :to="item.to"
+            class="font-normal leading-[24px] text-customGray text-[16px] hover:text-[#003b80] hover:font-[800]"
+            :class="{ 'font-[800] text-[#003b80]': item.featured }"
+            @click="$emit('close')"
+          >
+            {{ item.label }}
           </router-link>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            IBD
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Migraine
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Multiple Sclerosis (MS)
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Rheumatoid Arthritis
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Type 2 Diabetes
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Sponsored Topics
-          </p>
         </div>
         <div class="max-w-[176px] flex flex-col gap-[20px]">
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Acid Reflux
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            ADHD
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Allergies
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Alzheimer’s & Dementia
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Bipolar Disorder
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Cancer
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Crohn’s Disease
-          </p>
+          <router-link
+            v-for="item in columns[1]"
+            :key="item.to"
+            :to="item.to"
+            class="font-normal leading-[24px] text-customGray text-[16px] hover:text-[#003b80]"
+            @click="$emit('close')"
+          >
+            {{ item.label }}
+          </router-link>
         </div>
         <div class="max-w-[176px] flex flex-col gap-[20px]">
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Chronic Pain
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Cold & Flu
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            COPD
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Depression
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Fibromyalgia
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Heart Disease
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            High Cholesterol
-          </p>
+          <router-link
+            v-for="item in columns[2]"
+            :key="item.to"
+            :to="item.to"
+            class="font-normal leading-[24px] text-customGray text-[16px] hover:text-[#003b80]"
+            @click="$emit('close')"
+          >
+            {{ item.label }}
+          </router-link>
         </div>
         <div class="max-w-[176px] flex flex-col gap-[20px]">
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            HIV
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Hypertension
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            IPF
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Osteoarthritis
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Psoriasis
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            Skin Disorders Care
-          </p>
-          <p class="font-normal leading-[24px] text-customGray text-[16px]">
-            STDs
-          </p>
+          <router-link
+            v-for="item in columns[3]"
+            :key="item.to"
+            :to="item.to"
+            class="font-normal leading-[24px] text-customGray text-[16px] hover:text-[#003b80]"
+            @click="$emit('close')"
+          >
+            {{ item.label }}
+          </router-link>
         </div>
       </div>
-      <div class="mt-[40px] ">
-        <button class="bg-customGray text-white p-[20px_32px] rounded-[40px]">
+      <div class="mt-[40px]">
+        <router-link
+          to="/case-studies"
+          class="inline-block bg-customGray text-white p-[20px_32px] rounded-[40px]"
+          @click="$emit('close')"
+        >
           Read More
-        </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
-<script setup>
-import { defineProps } from 'vue';
 
-const props = defineProps({
+<script setup>
+import { conditionPath } from "../../data/conditions";
+
+defineProps({
   isOpen: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 });
 
+defineEmits(["close"]);
+
+const columns = [
+  [
+    { label: "Breast Cancer", to: "/breast-cancer", featured: true },
+    { label: "IBD", to: conditionPath("ibd") },
+    { label: "Migraine", to: conditionPath("migraine") },
+    { label: "Multiple Sclerosis (MS)", to: conditionPath("multiple-sclerosis") },
+    { label: "Rheumatoid Arthritis", to: conditionPath("rheumatoid-arthritis") },
+    { label: "Type 2 Diabetes", to: conditionPath("type-2-diabetes") },
+    { label: "Sponsored Topics", to: "/case-studies" },
+  ],
+  [
+    { label: "Acid Reflux", to: conditionPath("acid-reflux") },
+    { label: "ADHD", to: conditionPath("adhd") },
+    { label: "Allergies", to: conditionPath("allergies") },
+    { label: "Alzheimer’s & Dementia", to: conditionPath("alzheimers-dementia") },
+    { label: "Bipolar Disorder", to: conditionPath("bipolar-disorder") },
+    { label: "Cancer", to: conditionPath("cancer") },
+    { label: "Crohn’s Disease", to: conditionPath("crohns-disease") },
+  ],
+  [
+    { label: "Chronic Pain", to: conditionPath("chronic-pain") },
+    { label: "Cold & Flu", to: conditionPath("cold-flu") },
+    { label: "COPD", to: conditionPath("copd") },
+    { label: "Depression", to: conditionPath("depression") },
+    { label: "Fibromyalgia", to: conditionPath("fibromyalgia") },
+    { label: "Heart Disease", to: conditionPath("heart-disease") },
+    { label: "High Cholesterol", to: conditionPath("high-cholesterol") },
+  ],
+  [
+    { label: "HIV", to: conditionPath("hiv") },
+    { label: "Hypertension", to: conditionPath("hypertension") },
+    { label: "IPF", to: conditionPath("ipf") },
+    { label: "Osteoarthritis", to: conditionPath("osteoarthritis") },
+    { label: "Psoriasis", to: conditionPath("psoriasis") },
+    { label: "Skin Disorders Care", to: conditionPath("skin-disorders-care") },
+    { label: "STDs", to: conditionPath("stds") },
+  ],
+];
 </script>
+
 <style></style>
